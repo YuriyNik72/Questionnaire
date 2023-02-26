@@ -8,4 +8,5 @@ create table users (
     email   varchar(120) not null
             unique
 );
-insert into users (username, password, email) VALUES ('user', '$2y$10$AYxR6pZd1LPECNtwfqqo2ejp/q51WuhvjhmwV0h.ZWOro3n1IHuvi', 'user@mail.com');
+insert into users (username, password, email) VALUES
+    ('user', '$2y$10$AYxR6pZd1LPECNtwfqqo2ejp/q51WuhvjhmwV0h.ZWOro3n1IHuvi', 'user@mail.com');

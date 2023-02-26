@@ -32,6 +32,7 @@
         <dependency>
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-core</artifactId>
+            <version>9.15.1</version>
         </dependency>
         <dependency>
             <groupId>org.thymeleaf.extras</groupId>
@@ -92,9 +93,11 @@
             <plugin>
                 <groupId>org.flywaydb</groupId>
                 <artifactId>flyway-maven-plugin</artifactId>
-                <version>8.0.5</version>
+                <version>9.15.1</version>
                 <configuration>
-                    <configFile>src/main/resources/flyway.conf</configFile>
+                    <configFiles>
+                        <configFile>src/main/resources/flyway.conf</configFile>
+                    </configFiles>
                 </configuration>
             </plugin>
         </plugins>

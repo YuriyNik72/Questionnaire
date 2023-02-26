@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS users_roles cascade ;
+DROP TABLE IF EXISTS users_roles;
 
 CREATE TABLE users_roles (
     user_id bigint NOT NULL,
