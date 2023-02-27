@@ -13,21 +13,28 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
     private String username;
 
-    @Column
     private String password;
 
-    @Column
     private String email;
 
 
     @ManyToMany
-    @JoinTable(name = "users_role", joinColumns = @JoinColumn(name = "user_id"),
+    @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"),
     inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Collection<Role> roles;
 
-    private Collection<Role> role;
+    public User(String username, String encode, String email) {
+        this.username = username;
+        this.password = encode;
+        this.email = email;
+    }
+
+    public User() {
+
+    }
+
 
     @Override
     public String toString() {
@@ -38,7 +45,7 @@ public class User {
                 ", email='" + email + '\'' +
                 '}';
     }
-
+//
 //    public  void addUser(User user){
 //        this.user.add(user);
 //    }

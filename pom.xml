@@ -11,8 +11,8 @@
     <groupId>ru.nikitin</groupId>
     <artifactId>questionnaire</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>delete</name>
-    <description>delete</description>
+    <name>questionnaire</name>
+    <description>questionnaire</description>
     <properties>
         <java.version>11</java.version>
     </properties>
@@ -29,16 +29,20 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.flywaydb</groupId>
-            <artifactId>flyway-core</artifactId>
-            <version>9.15.1</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.flywaydb</groupId>-->
+<!--            <artifactId>flyway-core</artifactId>-->
+<!--            <version>9.15.1</version>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>org.thymeleaf.extras</groupId>
             <artifactId>thymeleaf-extras-springsecurity5</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>org.webjars.bower</groupId>
+            <artifactId>jquery</artifactId>
+            <version>3.3.1</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
@@ -90,16 +94,16 @@
                     </excludes>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.flywaydb</groupId>
-                <artifactId>flyway-maven-plugin</artifactId>
-                <version>9.15.1</version>
-                <configuration>
-                    <configFiles>
-                        <configFile>src/main/resources/flyway.conf</configFile>
-                    </configFiles>
-                </configuration>
-            </plugin>
+<!--            <plugin>-->
+<!--                <groupId>org.flywaydb</groupId>-->
+<!--                <artifactId>flyway-maven-plugin</artifactId>-->
+<!--                <version>9.15.1</version>-->
+<!--                <configuration>-->
+<!--                    <configFiles>-->
+<!--                        <configFile>src/main/resources/flyway.conf</configFile>-->
+<!--                    </configFiles>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
         </plugins>
     </build>
 

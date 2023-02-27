@@ -22,20 +22,22 @@
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary ">
         <!--<a class="navbar-brand" href="#">GeekMarket</a>-->
         <img th:src="@{/images/icon.png}" />
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+<!--        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"-->
+<!--                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">-->
+<!--            <span class="navbar-toggler-icon"></span>-->
+<!--        </button>-->
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li sec:authorize="hasRole('ADMIN')" class="nav-item">
                     <a class="nav-link" th:href="@{/admin}">Управление</a>
                 </li>
-                <li class="nav-item" th:classappend="${activeTab == 'Home' ? 'active' : ''}">
-                    <a class="nav-link" th:href="@{/}">@GeekMarket<span class="sr-only">(current)</span></a>
-                </li>
+                <div sec:authorize="isAnonymous()">
+                    <li class="nav-item" th:classappend="${activeTab == 'Home' ? 'active' : ''}">
+                        <a class="nav-link" th:href="@{/register}">Регистрация<span class="sr-only">(current)</span></a>
+                    </li>
+                </div>
                 <li class="nav-item" th:classappend="${activeTab == 'Shop' ? 'active' : ''}">
-                    <a class="nav-link" th:href="@{/shop}">Каталог товаров<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" th:href="@{/shop}">Выбор темы<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item" th:classappend="${activeTab == 'ShoppingCart' ? 'active' : ''}">
                     <a class="nav-link" th:href="@{/shop/cart}">Корзина<span class="sr-only">(current)</span></a>
@@ -59,6 +61,7 @@
         </div>
     </nav>
     <div class="visible-md" style="height:80px;"></div>
+
 </div>
 
 </body>
