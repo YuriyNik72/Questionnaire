@@ -7,4 +7,6 @@ import ru.nikitin.entities.Role;
 @Repository
 public interface RoleRepository extends CrudRepository<Role, Long> {
 
+//    Role findOneByName(String roleEmployee);
+    Role findOneByName(String role);
 }

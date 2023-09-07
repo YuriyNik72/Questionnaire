@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+  <head>
+
+      <title>Manager panel</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta charset="UTF-8">
+
+    <script type="text/javascript" th:src="@{/webjars/jquery/3.3.1/dist/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/webjars/bootstrap/4.1.3/js/bootstrap.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/main.js}"></script>
+    <link type="text/css" rel="stylesheet" th:href="@{/webjars/bootstrap/4.1.3/css/bootstrap.min.css}"/>
+    <link type="text/css" rel="stylesheet" th:href="@{/css/main.css}"/>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Manager Panel</h1>
+
+      <div th:replace="~{navigation :: navi(AdminDashboard)}" />
+    </div>
+    <div id="datebox" style="margin-top: 50px;" class="mainbox col-md-3 col-md-offset-2 col-sm-6 col-sm-offset-2">
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <div class="panel-title"></div>
+          <div style="padding-top: 30px" class="panel-body">
+             <form th:action="@{/}" method="POST" class="form-horizontal">
+              <div class="form-group">
+                <div class="col-xs-15">
+                </div>
+              </div>
+            </form>
+            <form method="POST" th:action="@{/manager}" id="dateForm">
+              <label for="question">Question: </label>
+              <input type="text" name="question"/><br/>
+              <label for="answer_1">Answer: </label>
+              <input type="text" name="answer1"/><br/>
+              <label for="answer_2">Answer: </label>
+              <input type="text" name="answer2"/><br/>
+              <label for="answer_3">Answer: </label>
+              <input type="text" name="answer3"/><br/>
+              <input type="submit" value="Save"/>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
