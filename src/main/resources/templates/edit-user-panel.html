@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+    <head>
+        <title>Admin Panel</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+        <script type="text/javascript" th:src="@{/webjars/jquery/3.3.1/dist/jquery.min.js}"></script>
+        <script type="text/javascript" th:src="@{/webjars/bootstrap/4.1.3/js/bootstrap.min.js}"></script>
+        <script type="text/javascript" th:src="@{/js/main.js}"></script>
+        <link type="text/css" rel="stylesheet" th:href="@{/webjars/bootstrap/4.1.3/css/bootstrap.min.css}"/>
+        <link type="text/css" rel="stylesheet" th:href="@{/css/main.css}"/>
+    </head>
+
+    <body>
+        <div class="container">
+            <h1>Admin Panel</h1>
+
+            <div th:replace="~{navigation :: navi(AdminDashboard)}"/>
+                <div class="col-10 mx-auto">
+                    <p>role:
+                    1- user
+                    2- admin
+                    3- manager</p>
+                        <form th:action="${updateUser}" th:method="POST"  th:object="${user}">
+                                    <input type="hidden" class="form-control" th:field="*{id}"><br/>
+                                <div class="md-3">
+                                    <label>UserName: </label>
+                                    <input type="text" class="form-control" th:field="*{username}" placeholder="Enter name"><br/>
+                                </div>
+                            <div class="md-3">
+                                <label>Password: </label>
+                                <input type="text" class="form-control" th:field="*{password}" placeholder="Enter password"><br/>
+                            </div>
+                                <div class="md-3">
+                                    <label>Email: </label>
+                                    <input type="text" class="form-control" th:field="*{email}" placeholder="Enter email"><br/>
+                                </div>
+                                <div class="md-3">
+                                    <label>Role: </label>
+                                    <input type="text" class="form-control" th:field="*{roles}" placeholder="Enter role"><br/>
+                                </div>
+                                <button type="submit" name="editUser" class="btn btn-primary"> Save </button>
+
+<!--                                <button type="submit" th:name="deleteById" class="btn btn-primary"> Delete </button>-->
+                        </form>
+
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

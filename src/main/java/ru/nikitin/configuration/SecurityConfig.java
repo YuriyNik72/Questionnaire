@@ -8,15 +8,17 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import ru.nikitin.services.UserService;
+import ru.nikitin.services.UserServiceImpl;
 
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    private UserService userService;
+    private UserServiceImpl userServiceImpl;
      @Autowired
-    public void setUserService(UserService userService) {
-        this.userService = userService;
+    public void setUserServiceImpl(UserServiceImpl userServiceImpl) {
+        this.userServiceImpl = userServiceImpl;
     }
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -24,9 +26,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/auth/**").authenticated()
-                .antMatchers("/admin/**").hasAnyRole("ADMIN", "MANAGER")
-                .antMatchers("/profile/**").permitAll()
-                .antMatchers("/question/**").permitAll()
+                .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/manager/**").hasAnyRole("ADMIN", "MANAGER")
+                .antMatchers("/profile/**").authenticated()
+                .antMatchers("/question/**").authenticated()
                 .anyRequest().permitAll()
                 .and()
                 .formLogin()
@@ -35,7 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .successHandler(customAuthenticationSuccessHandler)
                 .and()
                 .logout()
-                .logoutSuccessUrl("/index")
+                .logoutSuccessUrl("/")
                 .permitAll();
     }
 
@@ -48,7 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider auth = new DaoAuthenticationProvider();
         auth.setPasswordEncoder(passwordEncoder());
-        auth.setUserDetailsService(userService);
+        auth.setUserDetailsService((UserDetailsService) userServiceImpl);
         return auth;
     }
 }

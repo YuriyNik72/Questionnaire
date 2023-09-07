@@ -1,9 +1,12 @@
 package ru.nikitin.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 @Entity
 @Data
@@ -19,22 +22,23 @@ public class User {
 
     private String email;
 
-
     @ManyToMany
     @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"),
     inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Collection<Role> roles;
 
+    public User() {
+    }
     public User(String username, String encode, String email) {
         this.username = username;
         this.password = encode;
         this.email = email;
     }
-
-    public User() {
-
+    public User(String username, String email, Collection<Role> roles) {
+        this.username = username;
+        this.email = email;
+        this.roles = roles;
     }
-
 
     @Override
     public String toString() {
@@ -45,9 +49,21 @@ public class User {
                 ", email='" + email + '\'' +
                 '}';
     }
+
+    public boolean isEmpty() {
+        if(username.isEmpty()){
+            return true;
+        }
+          return false;
+    }
+
+//    @JsonIgnore
+//    @Transient
+//    private boolean confirmed;
+
 //
-//    public  void addUser(User user){
-//        this.user.add(user);
+//    public  void update (User user){
+//        this.User.update(user);
 //    }
 
 

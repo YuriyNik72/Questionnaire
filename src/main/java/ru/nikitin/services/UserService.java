@@ -11,12 +11,13 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.nikitin.entities.Role;
 import ru.nikitin.entities.User;
 import ru.nikitin.repositories.UserRepository;
-
 import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 public class UserService implements UserDetailsService {
+
      private UserRepository userRepository;
     @Autowired
     public void setUserRepository(UserRepository userRepository) {
@@ -41,4 +42,27 @@ public class UserService implements UserDetailsService {
     private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles){
         return roles.stream().map(r -> new SimpleGrantedAuthority(r.getName())).collect(Collectors.toList());
     }
+    public User getByName(String username){
+        return userRepository.findOneByUsername(username);
+    }
+    public List<User> getAllUsers() {
+        return (List<User>)userRepository.findAll();
+    }
+
+    public User update (User user){
+        return userRepository.save(user);
+    }
+    public User deleteUserById (Long id) {
+        userRepository.deleteById(userRepository.findUserById(id).getId());
+        return null;
+    }
+public User findUserById(Long id){
+        return  userRepository.findUserById(id);
+}
+
+//    public User saveUser(User user){
+//        User userOut = userRepository.save(user);
+//        userOut.setConfirmed(true);
+//        return userOut;
+//    }
 }
