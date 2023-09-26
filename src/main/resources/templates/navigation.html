@@ -33,7 +33,7 @@
                     <a class="nav-link" th:href="@{/admin/users}">Управление</a>
                 </li>
                 <li sec:authorize="hasRole('ADMIN')" class="nav-item">
-                    <a class="nav-link" th:href="@{/admin/edit/}">Правка</a>
+                    <a class="nav-link" th:href="@{/manager/questions}">Правка</a>
                 </li>
 
                 <div sec:authorize="isAnonymous()">
@@ -44,9 +44,9 @@
                 <li class="nav-item" th:classappend="${activeTab == 'Shop' ? 'active' : ''}">
                     <a class="nav-link" th:href="@{/#}">Выбор темы<span class="sr-only">(current)</span></a>
                 </li>
-                <div sec:authorize="hasRole('MANAGER')" class="nav-items">
+                <div sec:authorize="hasRole('MANAGER, ADMIN')" class="nav-items">
                     <li class="nav-item" th:classappend="${activeTab == 'Manager' ? 'active' : ''}">
-                        <a class="nav-link" th:href="@{/manager}">Управление<span class="sr-only">(current)</span></a>
+                        <a class="nav-link" th:href="@{/manager/questions}">Управление<span class="sr-only">(question)</span></a>
                     </li>
                 </div>
                 <div sec:authorize="isAnonymous()">

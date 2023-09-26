@@ -41,9 +41,9 @@ public class QuestionController {
     }
 
     @PostMapping
-    public String processSaveQuestionAndAnswer(Question question, Answer title){
+    public String processSaveQuestionAndAnswer(Question question, Answer answer){
         questionRepository.save(question);
-        answerRepository.save(title);
+        answerRepository.save(answer);
         return "redirect:/manager";
     }
 //    @GetMapping("")

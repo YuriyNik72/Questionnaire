@@ -22,16 +22,16 @@
                     1- user
                     2- admin
                     3- manager</p>
-                        <form th:action="${updateUser}" th:method="POST"  th:object="${user}">
+                        <form th:action="@{editUser}" th:method="POST"  th:object="${user}">
                                     <input type="hidden" class="form-control" th:field="*{id}"><br/>
                                 <div class="md-3">
                                     <label>UserName: </label>
                                     <input type="text" class="form-control" th:field="*{username}" placeholder="Enter name"><br/>
                                 </div>
-                            <div class="md-3">
-                                <label>Password: </label>
-                                <input type="text" class="form-control" th:field="*{password}" placeholder="Enter password"><br/>
-                            </div>
+                                <div class="md-3">
+                                    <label>Password: </label>
+                                    <input type="text" class="form-control" th:field="*{password}" placeholder="Enter password"><br/>
+                                </div>
                                 <div class="md-3">
                                     <label>Email: </label>
                                     <input type="text" class="form-control" th:field="*{email}" placeholder="Enter email"><br/>
@@ -41,10 +41,7 @@
                                     <input type="text" class="form-control" th:field="*{roles}" placeholder="Enter role"><br/>
                                 </div>
                                 <button type="submit" name="editUser" class="btn btn-primary"> Save </button>
-
-<!--                                <button type="submit" th:name="deleteById" class="btn btn-primary"> Delete </button>-->
                         </form>
-
                 </div>
             </div>
         </div>

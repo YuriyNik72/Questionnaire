@@ -21,20 +21,23 @@ public class QuestionService {
     }
 
     public List<Question> getAllQuestion() {
-        List<Question> questions = questionRepository.findAll();
-        return questions;
+        return (List<Question>)questionRepository.findAll();
     }
 
-    public Question getQuestionById(Long id) {
-        Optional<Question> question = questionRepository.findById(id);
-        if (question.isPresent()) {
-            return question.get();
-        }
-        return null;
+    public Question getByQuestion(String question) {
+        return questionRepository.findOneByQuestion(question);
     }
 
-    public Question findById(Long id) {
-        return null;
+//    public Question getQuestionById(Long id) {
+//        Optional<Question> question = questionRepository.findById(id);
+//        if (question.isPresent()) {
+//            return question.get();
+//        }
+//        return null;
+//    }
+
+    public Question findQuestionById(Long id) {
+        return questionRepository.findQuestionById(id);
     }
 
 //    public Page<Question> findAll(int size, int num) {
@@ -45,9 +48,22 @@ public class QuestionService {
 //        return null;
 //    }
 
-    public void saveOrUpdate(Question question) {
+    public Question saveOrUpdate(Question question) {
+            return questionRepository.save(question);
     }
 
-    public void deleteById(long id) {
+    public void deleteQuestionById(Long id) {
     }
+
+//    public boolean isEmpty(boolean empty) {
+//        return true;
+//    }
+
+//    public boolean isEmpty(boolean empty) {
+//        Optional<Question> question = questionRepository.findOneByQuestion();
+//        if(question.isEmpty()){
+//            return true;
+//        }
+//        return false;
+//    }
 }

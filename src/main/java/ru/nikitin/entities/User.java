@@ -1,12 +1,10 @@
 package ru.nikitin.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+
 
 @Entity
 @Data

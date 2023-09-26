@@ -45,13 +45,12 @@ public class AdminController {
 
     @GetMapping("/users")
     public String showUsers(Model model) {
-        List<User> users = (List<User>) userService.getAllUsers();
+        List<User> users = userService.getAllUsers();
         model.addAttribute("users", users);
         return "admin-panel";
     }
-
     @GetMapping("/edit/{id}")
-    public String edit(Model model, @PathVariable(name = "id") Long id) {
+    public String editUser(Model model, @PathVariable(name = "id") Long id) {
         model.addAttribute("user", userService.findUserById(id));
         return "edit-user-panel";
     }
@@ -79,10 +78,10 @@ public class AdminController {
 
     @PostMapping("/del/{id}")
     public String deleteById(@PathVariable(name = "id")  Long id) {
-//        if (userService.findUserById(id).equals(id)) {
-//            userService.deleteUserById(userService.findUserById(id).getId());
-//            return "redirect:admin-panel";
-//        }
+        if (userService.findUserById(id).equals(id)) {
+            userService.deleteUserById(userService.findUserById(id).getId());
+            return "redirect:/admin-panel";
+        }
         userService.deleteUserById(id);
         return "redirect:/admin/users";
 
