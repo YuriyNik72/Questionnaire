@@ -18,33 +18,43 @@
       <h1>Manager Panel</h1>
 
       <div th:replace="~{navigation :: navi(AdminDashboard)}" />
-
-        <div class="container">
-          <br>
-          <table class="table">
-            <thead class="thead-dark">
-            <tr>
-              <th>ID</th>
-              <th>Вопрос</th>
-              <th>Ответ</th>
-            </tr>
-            </thead>
-            <tr class="responsive-row" th:each="question : ${questions}">
-              <td th:text="${question.id}"/>
-              <td th:text="${question.question}"/>
-              <td th:text="${question.answer}"/>
-              <td>
-                <a class="btn btn-success" th:href="@{/manager/edit/{id}(id = ${question.id})}">
-                  <input type="submit" class="btn btn-success" value="Edite"/></a>
+          <div class="container">
+            <br>
+            <table>
+              <td >
+                <a class="btn btn-danger"  th:href="@{/manager/new}" >
+                  <input type="submit" name="addForm" class="btn btn-danger" value="Создать"/></a>
               </td>
-              <td>
-                <a class="btn btn-danger"  th:href="@{/manager/del/{id}(id = ${question.id})}" >
-                  <input type="submit" name="deleteById" class="btn btn-danger" value="Delete"/></a>
-              </td>
-            </tr>
-          </table>
+            </table>
+            <br>
+            <table class="table" border="1" cellpadding="10">
+              <thead class="thead-dark">
+              <tr>
+                <th>ID</th>
+                <th>Вопрос</th>
+                <th>Ответ</th>
+                <th colspan="2">Действие</th>
+              </tr>
+              </thead>
+              <tbody>
+                <tr class="responsive-row" th:each="question : ${listQuestions}">
+                  <td  th:text="${question.id}">Question_ID</td>
+                  <td th:text="${question.questionName}">Вопрос</td>
+                  <td th:text="${question.answers}">Ответ</td>
+                  <td >
+                    <a class="btn btn-success" th:href="@{/manager/edit/{id}(id = ${question.id})}">
+                      <input type="submit" class="btn btn-success" value="Edite"/></a>
+                  </td>
+                  <td>
+                    <a class="btn btn-danger"  th:href="@{/manager/delete/{id}(id = ${question.id})}" >
+                      <input type="submit" name="deleteById" class="btn btn-danger" value="Delete"/></a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
-     </div>
+<!--    <div th:replace="~{navigation :: navi(foot)}" />-->
     </div>
   </body>
 </html>

@@ -1,7 +1,7 @@
 package ru.nikitin.entities;
 
 
-import org.jetbrains.annotations.NotNull;
+
 import ru.nikitin.validation.FieldMatch;
 import lombok.Data;
 import lombok.NoArgsConstructor;

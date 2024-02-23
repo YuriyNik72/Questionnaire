@@ -1,14 +1,17 @@
 package ru.nikitin.entities;
 
-import lombok.Data;
+
+import lombok.extern.log4j.Log4j2;
 
 import javax.persistence.*;
 import java.util.Date;
 
+
+@Log4j2
 @Entity
 @Table(name = "answers")
-@Data
 public class Answer {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -21,36 +24,92 @@ public class Answer {
     @Column(name = "answer_3")
     private String answer_3;
 
-//    @ManyToOne
-//    @JoinColumn(name="question_id")
-//    private Question question;
+    @ManyToOne( cascade = CascadeType.ALL)
+    @JoinColumn(name ="question_id")
+    private Question question;
 
-    public Answer(String answer_1, String answer_2, String answer_3){
-        this.answer_1 = answer_1;
-        this.answer_2 = answer_2;
-        this.answer_3 = answer_3;
-
-    }
+    @Column(name = "create_at")
+    @Temporal(TemporalType.DATE)
+    private Date createAt;
 
     public Answer() {
+        log.info("Answer конструктор Answer без параметров");
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getAnswer_1() {
+        return answer_1;
+    }
+
+    public void setAnswer_1(String answer_1) {
+        this.answer_1 = answer_1;
+    }
+
+    public String getAnswer_2() {
+        return answer_2;
+    }
+
+    public void setAnswer_2(String answer_2) {
+        this.answer_2 = answer_2;
+    }
+
+    public String getAnswer_3() {
+        return answer_3;
+    }
+
+    public void setAnswer_3(String answer_3) {
+        this.answer_3 = answer_3;
+    }
+
+    public Question getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(Question question) {
+        this.question = question;
+    }
+
+    public Date getCreateAt() {
+        return createAt;
+    }
+
+    public void setCreateAt(Date createAt) {
+        this.createAt = createAt;
     }
 
     @Override
     public String toString() {
-        return "Answer{" +
-                "id=" + id +
-                ", answer_1='" + answer_1 + '\'' +
-                ", answer_2='" + answer_2 + '\'' +
-                ", answer_3='" + answer_3 + '\'' +
-//                ", question=" + question +
-                '}';
+        return
+                "Ответ_1= '" + answer_1 + '\'' +
+                ", Ответ_2= '" + answer_2 + '\'' +
+                ", Ответ_3= '" + answer_3
+//                        + '\'' + ", " + question
+                ;
     }
-    //    @Column(name = "image")
+
+
+        //    @Column(name = "image")
 //    private String imagePath;
 
 
-//
-//    @Column(name = "create_at")
-//    @Temporal(TemporalType.DATE)
-//    private Date createAt;
+
+
+
+
+//    public boolean isEmpty() {
+//        if(answer_1.isEmpty()
+//                & answer_2.isEmpty()
+//                & answer_3.isEmpty()
+//        ){
+//            return true;
+//        }
+//        return false;
+//    }
 }

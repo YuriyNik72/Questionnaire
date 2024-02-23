@@ -29,35 +29,43 @@
     <!--                </div>-->
     <!--              </div>-->
     <!--            </form>-->
-                <form  th:action="@{editQuestion}" th:method="POST" th:object="${question}">
+                <form  th:action="@{updateOrSave}" th:method="POST" th:object="${question}">
     <!--                <input type="hidden" class="form-control" th:field="*{id}"><br/>-->
                     <label >Id: </label>
                     <input type="text" class="form-control" th:field="*{id}"><br/>
                   <div class="md-3">
                     <label >Question: </label>
                     <input type="text" class="form-control" th:field="*{question}" placeholder="Enter question"><br/>
+<!--                      <div class="md-3">-->
+<!--                          <label >Answer1: </label>-->
+<!--                          <input type="text" class="form-control" th:field="*{answer}" placeholder="Enter question"><br/>-->
+<!--                      </div>-->
                   </div>
 <!--                </form>-->
-<!--                <form th:action="@{editAnswer}" th:method="POST" th:object="${answer}">-->
-<!--                    <div class="md-3">-->
-<!--                        <label >Answer1: </label>-->
-<!--                        <input type="text" class="form-control" th:field="*{answer_1}" placeholder="Enter question"><br/>-->
-<!--                    </div>-->
-<!--                    <div class="md-3">-->
-<!--                        <label >Answer2: </label>-->
-<!--                        <input type="text" class="form-control" th:field="*{answer_2}" placeholder="Enter question"><br/>-->
-<!--                    </div>-->
-<!--                    <div class="md-3">-->
-<!--                        <label >Answer3: </label>-->
-<!--                        <input type="text" class="form-control" th:field="*{answer_3}" placeholder="Enter question"><br/>-->
-<!--                    </div>-->
+                    <form th:action="@{editAnswer}" th:method="POST" th:object="${answer}">
+                        <label >Id: </label>
+                        <input type="text" class="form-control" th:field="*{id}"><br/>
+                        <div class="md-3">
+                            <label >Answer1: </label>
+                            <input type="text" class="form-control" th:field="*{answer_1}" placeholder="Enter answer"><br/>
+                        </div>
+                        <div class="md-3">
+                            <label >Answer2: </label>
+                            <input type="text" class="form-control" th:field="*{answer_2}" placeholder="Enter answer"><br/>
+                        </div>
+                        <div class="md-3">
+                            <label >Answer3: </label>
+                            <input type="text" class="form-control" th:field="*{answer_3}" placeholder="Enter question"><br/>
+                        </div>
 
-                  <button type="submit" name="editUser" class="btn btn-primary"> Save </button>
+                    <button type="submit" name="save" class="btn btn-primary"> Save </button>
                 </form>
+                </form>
+
 <!--              </div>-->
     <!--        </div>-->
-<!--          </div> -->
+          </div>
         </div>
-    </div>
+      </div>
   </body>
 </html>

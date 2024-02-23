@@ -11,59 +11,60 @@ import java.util.Optional;
 
 @Service
 public class QuestionService {
-    private QuestionRepository questionRepository;
-
+    private QuestionRepository repoq;
 
     @Autowired
-    public void setQuestionRepository(QuestionRepository questionRepository) {
-        this.questionRepository = questionRepository;
+    public void setQuestionRepository(QuestionRepository repoq) {
+        this.repoq = repoq;
        
     }
-
-    public List<Question> getAllQuestion() {
-        return (List<Question>)questionRepository.findAll();
+    public List<Question> listAll() {
+        return repoq.findAll();
     }
 
-    public Question getByQuestion(String question) {
-        return questionRepository.findOneByQuestion(question);
+    public Question saveQuestion(Question questionName) {
+        repoq.save(questionName);
+        return questionName;
+    }
+    public Question get(Long id){
+        return repoq.findById(id).get();
     }
 
+    public void delete(Long id){
+        repoq.deleteById(id);
+    }
+
+    public Question getByQuestion(String questionName) {
+    return repoq.findOneByQuestionName(questionName);
+    }
+
+//
 //    public Question getQuestionById(Long id) {
-//        Optional<Question> question = questionRepository.findById(id);
+//        Optional<Question> question = repoq.findById(id);
 //        if (question.isPresent()) {
 //            return question.get();
 //        }
 //        return null;
 //    }
-
-    public Question findQuestionById(Long id) {
-        return questionRepository.findQuestionById(id);
-    }
-
-//    public Page<Question> findAll(int size, int num) {
-//        return null;
+//
+//    public Question findQuestionById(Long id) {
+//        return repoq.findQuestionById(id);
+//    }
+////
+////    public Page<Question> findAll(int size, int num) {
+////        return null;
+////    }
+////
+////    public Page<Question> getFiltered(String filter, int size, int num) {
+////        return null;
+////    }
+//
+//    public Question saveOrUpdate(Question question) {
+//            return  repoq.save(question);
 //    }
 //
-//    public Page<Question> getFiltered(String filter, int size, int num) {
-//        return null;
+//    public void deleteQuestionById(Long id) {
+//        repoq.deleteById(repoq.findQuestionById(id).getId());
 //    }
 
-    public Question saveOrUpdate(Question question) {
-            return questionRepository.save(question);
-    }
-
-    public void deleteQuestionById(Long id) {
-    }
-
-//    public boolean isEmpty(boolean empty) {
-//        return true;
-//    }
-
-//    public boolean isEmpty(boolean empty) {
-//        Optional<Question> question = questionRepository.findOneByQuestion();
-//        if(question.isEmpty()){
-//            return true;
-//        }
-//        return false;
-//    }
 }

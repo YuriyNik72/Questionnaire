@@ -1,52 +1,75 @@
 package ru.nikitin.entities;
 
-import lombok.Data;
+import lombok.extern.log4j.Log4j2;
 
 import javax.persistence.*;
-import java.util.Collection;
+import java.util.ArrayList;
+import java.util.List;
 
-
+@Log4j2
 @Entity
-@Data
 @Table(name = "questions")
 public class Question {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
+    @Column(name = "question")
+    private String questionName;
 
-    private String question;
-
-    @ManyToMany
-    @JoinTable(name = "question_answers", joinColumns = @JoinColumn(name = "question_id"),
-    inverseJoinColumns = @JoinColumn(name = "answer_id"))
-    private Collection<Answer> answer;
-
+    @OneToMany(mappedBy = "question", cascade=CascadeType.ALL)
+    private List<Answer> answers = new ArrayList<>();
 
     public Question() {
+        log.info("конструктор Question без параметров");
+    }
+    public Question(String questionName, List<Answer> answers) {
+        this.questionName = questionName;
+        this.answers = answers;
+    }
+    public Long getId() {
+        return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
+    }
+    public void setQuestionName(String questionName) {
+        this.questionName = questionName;
     }
 
-    public Question(String question, Collection<Answer> answer){
-        this.question = question;
-        this.answer = answer;
+    public String getQuestionName() {
+        return questionName;
     }
-    public Question(String question){
-        this.question = question;
+
+    public void setAnswers(List<Answer> answers) {
+        this.answers = answers;
     }
-    @Override
-    public String toString() {
-        return "Question{" +
-                "id=" + id +
-                ", question='" + question + '\'' +
-                ", answer=" + answer +
-                '}';
+
+    public List<Answer> getAnswers() {
+    return this.answers;
     }
 
     public boolean isEmpty() {
-        if(question.isEmpty()){
+        if(questionName.isEmpty()){
             return true;
         }
         return false;
     }
+    public void addAnswer(Answer answer) {
+        if (answers == null) {
+            answers = new ArrayList<>();
+        }
+        answers.add(answer);
+    }
 
+//    @Override
+//    public String toString() {
+//        return "Question{" +
+//                "id= " + id +
+//                ", question= '" + questionName + '\'' +
+////                ", answers=" + answers +
+//                '}';
+//    }
 }

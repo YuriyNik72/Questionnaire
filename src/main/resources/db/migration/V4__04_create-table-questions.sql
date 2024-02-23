@@ -4,4 +4,4 @@ CREATE TABLE questions (
      id bigserial primary key,
      question varchar (2000)
 );
-insert into questions (question) values ('one');
+-- insert into questions (question) values ('fghytjh');

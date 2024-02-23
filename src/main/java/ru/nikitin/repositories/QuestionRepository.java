@@ -1,6 +1,7 @@
 package ru.nikitin.repositories;
 
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import ru.nikitin.entities.Question;
@@ -10,14 +11,25 @@ import java.util.List;
 
 @Repository
 //public interface QuestionRepository extends PagingAndSortingRepository<Question, Long> {
-public interface QuestionRepository extends CrudRepository<Question, Long> {
+public interface QuestionRepository extends
+//        CrudRepository
+        JpaRepository<Question, Long> {
+    Question findOneByQuestionName(String questionName);
 
-    Question findOneByQuestion(String question);
-//    Optional<Question> findById(Long id);
-    Question findQuestionById(Long id);
-    List<Question> findAll();
-    @Override
-    Question save(Question question);
+//    Question findOneByQuestion(String question);
+////    Optional<Question> findById(Long id);
+//    Question findQuestionById(Long id);
+//    List<Question> findAll();
+//
+//    @Override
+////    <S extends Question> S save(S entity);
+//    Question save(Question question);
+
+
+    //    @Override
+//    Question save() {
+//        return new Question();
+//    };
 
 
 //    List<Answer> findAllByTitleAndPrice(String title, double price);
