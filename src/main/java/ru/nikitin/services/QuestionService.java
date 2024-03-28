@@ -22,9 +22,9 @@ public class QuestionService {
         return repoq.findAll();
     }
 
-    public Question saveQuestion(Question questionName) {
-        repoq.save(questionName);
-        return questionName;
+    public Question saveQuestion(Question question) {
+        repoq.save(question);
+        return question;
     }
     public Question get(Long id){
         return repoq.findById(id).get();
@@ -36,6 +36,10 @@ public class QuestionService {
 
     public Question getByQuestion(String questionName) {
     return repoq.findOneByQuestionName(questionName);
+    }
+
+    public boolean isQuestionWithQuestionNameExists(String questionName) {
+        return repoq.findOneByQuestionName(questionName) != null;
     }
 
 //

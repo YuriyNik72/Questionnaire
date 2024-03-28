@@ -5,12 +5,14 @@ import lombok.extern.log4j.Log4j2;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 
 @Log4j2
 @Entity
 @Table(name = "answers")
 public class Answer {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,8 +34,9 @@ public class Answer {
     @Temporal(TemporalType.DATE)
     private Date createAt;
 
+
     public Answer() {
-        log.info("Answer конструктор Answer без параметров");
+        log.info("конструктор Answer без параметров");
     }
 
     public Long getId() {
@@ -86,20 +89,14 @@ public class Answer {
 
     @Override
     public String toString() {
-        return
-                "Ответ_1= '" + answer_1 + '\'' +
+        return  "Ответ_1= '" + answer_1 + '\'' +
                 ", Ответ_2= '" + answer_2 + '\'' +
-                ", Ответ_3= '" + answer_3
-//                        + '\'' + ", " + question
-                ;
+                ", Ответ_3= '" + answer_3;
     }
 
 
         //    @Column(name = "image")
 //    private String imagePath;
-
-
-
 
 
 

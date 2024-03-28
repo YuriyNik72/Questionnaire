@@ -21,7 +21,7 @@ public class AnswerService {
         return repoa.findAll();
     }
 
-    public Answer get(long id){
+    public Answer get(Long id){
         return repoa.findById(id).get();
     }
 
@@ -36,9 +36,10 @@ public class AnswerService {
 //        return repoa.findAnswerById(id);
 //    }
 //
-//    public Answer saveOrUpdate(Answer answers) {
-//        return repoa.save(answers);
-//    }
+    public Answer saveOrUpdate(Answer answers) {
+        return repoa.save(answers);
+    }
+
 //
 //
 //    public void deleteAnswerById(Long id) {

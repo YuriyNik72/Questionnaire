@@ -55,12 +55,6 @@ public class AdminController {
         return "edit-user-panel";
     }
 
-    @GetMapping("/edit-user-panel")
-    public String updateUser(Model model,User user) {
-        model.addAttribute("user", userService.update(user));
-        return "redirect:admin-panel";
-
-    }
 
     @PostMapping("/edit/{id}")
     public String processUserAddForm( @ModelAttribute("user") @Valid User user, BindingResult theBindingResult, Model model) {
@@ -75,7 +69,12 @@ public class AdminController {
         userService.update(user);
         return "redirect:/admin/users";
     }
+    @GetMapping("/edit-user-panel")
+    public String updateUser(Model model,User user) {
+        model.addAttribute("user", userService.update(user));
+        return "redirect:admin-panel";
 
+    }
     @PostMapping("/del/{id}")
     public String deleteById(@PathVariable(name = "id")  Long id) {
         if (userService.findUserById(id).equals(id)) {

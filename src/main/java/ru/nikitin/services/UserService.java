@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.nikitin.entities.Role;
+import ru.nikitin.entities.SystemUser;
 import ru.nikitin.entities.User;
 import ru.nikitin.repositories.UserRepository;
 import java.util.Collection;

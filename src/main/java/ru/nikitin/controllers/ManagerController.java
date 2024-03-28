@@ -1,7 +1,6 @@
 package ru.nikitin.controllers;
 
 import lombok.extern.log4j.Log4j2;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,17 +9,17 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ru.nikitin.entities.Answer;
+import ru.nikitin.entities.Category;
 import ru.nikitin.entities.Question;
-import ru.nikitin.repositories.AnswerRepository;
-import ru.nikitin.repositories.QuestionRepository;
 import ru.nikitin.services.AnswerService;
+import ru.nikitin.services.CategoryService;
 import ru.nikitin.services.QuestionService;
 
 import javax.validation.Valid;
-import java.util.Collection;
+import javax.validation.constraints.NotNull;
 import java.util.List;
+import java.util.Optional;
 
-import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 @Controller
 @RequestMapping("/manager")
@@ -29,9 +28,7 @@ public class ManagerController {
 
     private QuestionService questionService;
     private AnswerService answerService;
-//    private QuestionRepository questionRepository;
-//    private AnswerRepository answerRepository;
-//    private Question question;
+    private CategoryService categoryService;
 
     @Autowired
     public void setQuestionService(QuestionService questionService){
@@ -40,10 +37,9 @@ public class ManagerController {
 
     @Autowired
     public void setAnswerService(AnswerService answerService){this.answerService = answerService;}
-//    @Autowired
-//    public void setQuestionRepository(QuestionRepository questionRepository){this.questionRepository = questionRepository;}
-//    @Autowired
-//    public void setAnswerRepository(AnswerRepository answerRepository){this.answerRepository = answerRepository;}
+
+    @Autowired
+    public  void setCategoryService(CategoryService categoryService){this.categoryService = categoryService;}
     @GetMapping
     public String managerHome() {
             return "manager-panel";
@@ -53,9 +49,8 @@ public class ManagerController {
     public String showQuestion(Model model) {
         log.info("ManagerController начал работать метод showQuestion");
         List<Question> listQuestions = questionService.listAll();
-//        List<Answer> listAnswers = answerService.listAll();
         model.addAttribute("listQuestions", listQuestions);
-//        model.addAttribute("listAnswers", listAnswers);
+//        model.addAttribute("category", categoryService.getAllCategories());
         log.info("ManagerController Отработал метод showQuestion");
         return "manager-panel";
     }
@@ -66,13 +61,15 @@ public class ManagerController {
         model.addAttribute("question", question);
         Answer answer = new Answer();
         model.addAttribute("answer", answer);
+        model.addAttribute("category", categoryService.getAllCategories());
         return "new_question";
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String saveQuestion(@ModelAttribute("question") Question question, Answer answer) {
+    public String saveQuestion(@ModelAttribute("question") Question question, Answer answer, Category category) {
         answer.setQuestion(question);
         question.addAnswer(answer);
+        question.setCategory(category);
         questionService.saveQuestion(question);
         return "redirect:/manager/questions";
     }
@@ -82,44 +79,45 @@ public class ManagerController {
         ModelAndView mav = new ModelAndView("edit_question");
         Question question = questionService.get(id);
         Answer answer = answerService.get(id);
+        List<Category> category = categoryService.getAllCategories();
         mav.addObject("question", question);
         mav.addObject("answers", answer);
+        mav.addObject("categories", category);
         return  mav;
-//        model.addAttribute("question", questionService.findQuestionById(id));
-//        log.info("ManagerController оработал метод editQuestion_question");
-//        model.addAttribute("answer", answerService.findAnswerById(id));
-//        log.info("ManagerController отработал метод editQuestion_answer");
-//        return "edit-manager-panel";
+
     }
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
-    public String processQuestionAddForm(@ModelAttribute("question") @Valid @NotNull Question question,  @Valid Answer answer,Long id,
-                                         BindingResult theBindingResult
-//            , Model model
+//    public String processQuestionAddForm(@ModelAttribute("question") @Valid Question question, BindingResult theBindingResult) {
+        public String processQuestionAddForm(@ModelAttribute("question") @Valid Question question, BindingResult theBindingResult
+                                         ,Model model, Answer answer
+//            , @RequestParam("file") MultipartFile file
     ) {
         log.info("ManagerController начал работать метод processQuestionAddForm");
 
-        if (question.getId() == 0 && questionService.getByQuestion(String.valueOf(question)).isEmpty()
-//             && answerService.getByAnswer(String.valueOf(answers)).isEmpty()
+        if (question.getId() == 0 && questionService.isQuestionWithQuestionNameExists(question.getQuestionName())
+//                && questionService.getByQuestion(String.valueOf(question)).isEmpty()
         ) {
-            theBindingResult.addError(new ObjectError("question.id",
-                    "Вопрос с таким номером уже существует")); // todo не отображает сообщение
+            theBindingResult.addError(new ObjectError("question",
+                    "Вопрос с таким названием уже существует")); // todo не отображает сообщение
         }
-//        if (theBindingResult.hasErrors()) {
-//            model.addAttribute("question", questionService.getAllQuestion());
-//            model.addAttribute("answer", answerService.getAllAnswer());
-//            return "redirect:/manager";
+        if (theBindingResult.hasErrors()) {
+            model.addAttribute("categories", categoryService.getAllCategories());
+            model.addAttribute("question", questionService.listAll());
+            model.addAttribute("answer", answerService.listAll());
+            return "redirect:/edit_question";
+        }
+            // TODO доделать File Service
+//        if (!file.isEmpty()) {
+//            String pathToSavedFile = fileSaverService.saveFile(file);
+//            QuestionFile questionfile = new QuestionFile();
+//            questionfile.setPath(pathToSavedFile);
+//            questionfile.setQuestion(question);
+//            question.addFile(questionFile);
 //        }
-        answer.setId(id);
-        answer.setQuestion(question);
-        question.addAnswer(answer);
-        questionService.saveQuestion(question);
+            answer.setQuestion(question);
+            question.addAnswer(answer);
+            questionService.saveQuestion(question);
         return "redirect:/manager/questions";
-
-//        questionService.saveOrUpdate(question);
-//        answerService.saveOrUpdate((Answer) answers);
-//        log.info("ManagerController отработал метод processQuestionAddForm");
-//        return "redirect:/manager/questions";
-
     }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
@@ -128,14 +126,7 @@ public class ManagerController {
         return "redirect:/manager/questions";
     }
 
-//    @GetMapping("/manager-panel")
-//    public String updateOrSave(Model model, Question question, List<Answer> answers) {
-//        log.info("ManagerController начал работать метод updateOrSave");
-//        model.addAttribute("question", questionService.saveOrUpdate(question));
-//        model.addAttribute("answer", answerService.saveOrUpdate((Answer)answers));
-//        log.info("отработал метод updateOrSave");
-//        return "redirect:/manager-panel";
-//        }
+
 //
 //
 //    @PostMapping("/del/{id}")
@@ -162,7 +153,7 @@ public class ManagerController {
 //        return "formAddQuestion";
 //    }
 //    @PostMapping("/add")
-//    public String addQuestion(AddFormQuestionController form, Model model) {
+//    public String addQuestion(ThemesController form, Model model) {
 //        log.info("ManagerController метод addQuestion");
 //        Question questions = questionRepository.findOneByQuestion(String.valueOf(question));
 //        if(questions == null){

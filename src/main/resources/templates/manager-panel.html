@@ -23,7 +23,7 @@
             <table>
               <td >
                 <a class="btn btn-danger"  th:href="@{/manager/new}" >
-                  <input type="submit" name="addForm" class="btn btn-danger" value="Создать"/></a>
+                <input type="submit" name="addForm" class="btn btn-danger" value="Создать"/></a>
               </td>
             </table>
             <br>
@@ -32,15 +32,17 @@
               <tr>
                 <th>ID</th>
                 <th>Вопрос</th>
-                <th>Ответ</th>
+                <th>Ответы</th>
+                <th>Категория</th>
                 <th colspan="2">Действие</th>
               </tr>
               </thead>
               <tbody>
                 <tr class="responsive-row" th:each="question : ${listQuestions}">
-                  <td  th:text="${question.id}">Question_ID</td>
+                  <td th:text="${question.id}">Question_ID</td>
                   <td th:text="${question.questionName}">Вопрос</td>
                   <td th:text="${question.answers}">Ответ</td>
+                  <td th:text="${question.category}">Категория</td>
                   <td >
                     <a class="btn btn-success" th:href="@{/manager/edit/{id}(id = ${question.id})}">
                       <input type="submit" class="btn btn-success" value="Edite"/></a>
@@ -54,7 +56,9 @@
             </table>
           </div>
         </div>
-<!--    <div th:replace="~{navigation :: navi(foot)}" />-->
     </div>
   </body>
+  <br>
+  <br>
+  <footer th:replace="my-footer.html :: foot" ></footer>
 </html>

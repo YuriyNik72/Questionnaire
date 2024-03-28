@@ -6,7 +6,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
-    <title>GeekWinterMarket</title>
+    <title>GT_Energo_Questionnary</title>
 
     <link rel="icon" type="image/png" th:href="@{/images/favicon.ico}"/>
 
@@ -42,7 +42,7 @@
                     </li>
                 </div>
                 <li class="nav-item" th:classappend="${activeTab == 'Shop' ? 'active' : ''}">
-                    <a class="nav-link" th:href="@{/#}">Выбор темы<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" th:href="@{/themes/category}">Выбор темы<span class="sr-only">(current)</span></a>
                 </li>
                 <div sec:authorize="hasRole('MANAGER, ADMIN')" class="nav-items">
                     <li class="nav-item" th:classappend="${activeTab == 'Manager' ? 'active' : ''}">

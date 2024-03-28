@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <title>Taco Cloud</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <script type="text/javascript" th:src="@{/webjars/jquery/3.3.1/dist/jquery.min.js}"></script>
+  <script type="text/javascript" th:src="@{/webjars/bootstrap/4.1.3/js/bootstrap.min.js}"></script>
+  <link type="text/css" rel="stylesheet" th:href="@{/webjars/bootstrap/4.1.3/css/bootstrap.min.css}"/>
+</head>
+<body>
+<img th:src="@{/images/GT.jpg}" />
+<h1> Add Question</h1>
+
+<div id="loginbox" style="margin-top: 50px;" class="mainbox col-md-3 col-md-offset-2 col-sm-6 col-sm-offset-2">
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <div class="panel-title"></div>
+      <div style="padding-top: 30px" class="panel-body">
+        <!--              <form th:action="@{/authenticateTheUser}" method="POST" class="form-horizontal">-->
+        <form th:action="@{/}" method="POST" class="form-horizontal">
+          <div class="form-group">
+            <div class="col-xs-15">
+            </div>
+          </div>
+        </form>
+        <form  th:action="@{/manager/add}" th:method="POST" id="addFormQuestion">
+          <label for id = "Question ID">Question ID: </label>
+          <input type="text" name="question_id"/><br/>
+          <label for id = "Question">Question: </label>
+          <input type="text" name="question"/><br/>
+          <label for id = "Answer1">Answer1: </label>
+          <input type ="text" name="answer_1"/><br/>
+          <label for id = "Answer2">Answer2: </label>
+          <input type ="text" name="answer_2"/><br/>
+          <label for id = "Answer3">Answer2: </label>
+          <input type ="text" name="answer_3"/><br/>
+          <input type="submit" value="ADD"/>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
