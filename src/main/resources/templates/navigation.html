@@ -6,9 +6,9 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
-    <title>GeekWinterMarket</title>
+    <title>GT_Energo_Questionnary</title>
 
-    <link rel="icon" type="image/png" th:href="@{/favicon.ico}"/>
+    <link rel="icon" type="image/png" th:href="@{/images/favicon.ico}"/>
 
     <script type="text/javascript" th:src="@{/webjars/jquery/3.3.1/dist/jquery.min.js}"></script>
     <script type="text/javascript" th:src="@{/webjars/bootstrap/4.1.3/js/bootstrap.min.js}"></script>
@@ -19,9 +19,10 @@
 <body>
 
 <div class="fluid-container" th:fragment="navi(activeTab)">
+    <img th:src="@{/images/icon.png}" />
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary ">
-        <!--<a class="navbar-brand" href="#">GeekMarket</a>-->
-        <img th:src="@{/images/icon.png}" />
+        <a class="navbar-brand" href="#"></a>
+
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -29,25 +30,35 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li sec:authorize="hasRole('ADMIN')" class="nav-item">
-                    <a class="nav-link" th:href="@{/admin}">Управление</a>
+                    <a class="nav-link" th:href="@{/admin/users}">Управление</a>
                 </li>
-                <li class="nav-item" th:classappend="${activeTab == 'Home' ? 'active' : ''}">
-                    <a class="nav-link" th:href="@{/}">@GeekMarket<span class="sr-only">(current)</span></a>
+                <li sec:authorize="hasRole('MANAGER')" class="nav-item">
+                    <a class="nav-link" th:href="@{/manager/questions}">Правка</a>
                 </li>
-                <li class="nav-item" th:classappend="${activeTab == 'Shop' ? 'active' : ''}">
-                    <a class="nav-link" th:href="@{/shop}">Каталог товаров<span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item" th:classappend="${activeTab == 'ShoppingCart' ? 'active' : ''}">
-                    <a class="nav-link" th:href="@{/shop/cart}">Корзина<span class="sr-only">(current)</span></a>
-                </li>
+
                 <div sec:authorize="isAnonymous()">
+                    <li class="nav-item" th:classappend="${activeTab == 'Home' ? 'active' : ''}">
+                        <a class="nav-link" th:href="@{/register}">Регистрация<span class="sr-only">(current)</span></a>
+                    </li>
+                </div>
+                <li class="nav-item" th:classappend="${activeTab == 'Shop' ? 'active' : ''}">
+                    <a class="nav-link" th:href="@{/themes/category}">Выбор темы<span class="sr-only">(current)</span></a>
+                </li>
+                <div sec:authorize="hasRole('MANAGER, ADMIN')" class="nav-items">
+                    <li class="nav-item" th:classappend="${activeTab == 'Manager' ? 'active' : ''}">
+                        <a class="nav-link" th:href="@{/admin/users}">Управление<span class="sr-only">(question)</span></a>
+                    </li>
+                </div>
+                <div sec:authorize="isAnonymous()">
+                    <li>
                     <a class="nav-link" th:href="@{/login}">Войти</a>
+                    </li>
                 </div>
                 <div sec:authorize="isAuthenticated()">
                     <li class="nav-item" th:classappend="${activeTab == 'Profile' ? 'active' : ''}">
-                        <a class="nav-link" th:href="@{/profile}">Профиль</a>
+                        <a class="nav-link" th:href="@{/#}">Профиль</a>
                     </li>
-                </div>
+                </div> <br>
                 <div sec:authorize="isAuthenticated()">
                     <li class="nav-item">
                         <form th:action="@{/logout}" method="POST">
@@ -59,6 +70,7 @@
         </div>
     </nav>
     <div class="visible-md" style="height:80px;"></div>
+
 </div>
 
 </body>

@@ -12,39 +12,39 @@
     <link type="text/css" rel="stylesheet" th:href="@{/css/main.css}"/>
 </head>
 
-<body>
+    <body>
 
-<div th:replace="~{navigation :: navi(Shop)}"></div>
+    <div th:replace="~{navigation :: navi(Shop)}"></div>
 
-<div class="container">
-    <br>
-    <h1>@GeekMarket</h1>
-    <table class="table">
-        <thead class="thead-dark">
-        <tr>
-            <th>#</th>
-            <th>Категория</th>
-            <th>Название товара</th>
-            <th>Цена</th>
-            <th></th>
-        </tr>
-        </thead>
-
-        <tr class="responsive-row" th:each="product : ${products}">
-            <td th:text="${product.id}"/>
-            <td th:text="${product.category.title}"/>
-            <td>
-                <span style="font-weight: bold;" th:text="${product.title}"></span>
+            <div class="container">
                 <br>
-                <span th:text="${product.shortDescription}"></span>
-            </td>
-            <td th:text="${product.price}"/>
-            <td>
-                <a th:href="@{'/shop/cart/add/' + ${product.id}}">Добавить в корзину</a>
-            <td/>
-        </tr>
-    </table>
-</div>
+                <h1>@GeekMarket</h1>
+                <table class="table">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>Категория</th>
+                        <th>Название товара</th>
+                        <th>Цена</th>
+                        <th></th>
+                    </tr>
+                    </thead>
 
-</body>
+                    <tr class="responsive-row" th:each="product : ${products}">
+                        <td th:text="${product.id}"/>
+                        <td th:text="${product.category.title}"/>
+                        <td>
+                            <span style="font-weight: bold;" th:text="${product.title}"></span>
+                            <br>
+                            <span th:text="${product.shortDescription}"></span>
+                        </td>
+                        <td th:text="${product.price}"/>
+                        <td>
+                            <a th:href="@{'/shop/cart/add/' + ${product.id}}">Добавить в корзину</a>
+                        <td/>
+                    </tr>
+                </table>
+            </div>
+
+    </body>
 </html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org" >
+	<head>
+		<meta charset="utf-8" />
+		<title> Edit Question</title>
+	</head>
+	<body>
+	<div align="center">
+		<h1>Редактирование вопроса</h1>
+		<br>
+		<form th:action="@{/manager/edit}" th:object="${question}"
+			  method="post" enctype="multipart/form-data">
+				<input th:field="*{id}" type="hidden" data-th-hidden="id"/>
+
+			<table class="table" border="5" cellpadding="25">
+				<tr>
+					<td>Вопрос:</td>
+					<td>
+						<input type="text" th:field="*{questionName}">
+					</td>
+						<div class="input-group">
+							<div class="form-group col-md-22">
+								<label>Выберите категорию</label>
+								<select class="form-control" th:field="*{category}" >
+									<option th:each="category: ${categories}"
+											th:value="${category.id}"
+											th:text="${category.categoryName}">
+									</option>
+								</select>
+							</div>
+						</div>
+					<br>
+					<br>
+				</tr>
+				<div class="col form-group" th:object="${answers}">
+					<tr >
+						<td>Ответ_1:</td>
+						<td>
+							<input  th:field="*{answer_1}" type="text"/>
+							<input th:field="*{otvet_1}" type="checkbox" th:value="${1}"/>
+						</td>
+					</tr>
+					<tr>
+						<td>Ответ_2:</td>
+						<td>
+							<input  th:field="*{answer_2}" type="text"/>
+							<input th:field="*{otvet_2}" type="checkbox" th:value="${1}"/>
+						</td>
+					</tr>
+					<tr>
+						<td>Ответ_3:</td>
+						<td>
+							<input  th:field="*{answer_3}" type="text"/>
+							<input th:field="*{otvet_3}" type="checkbox" th:value="${1}"/>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<button type="submit">Сохранить</button>
+						</td>
+					</tr>
+				</div>
+			</table>
+		</form>
+	</div>
+	</body>
+</html>

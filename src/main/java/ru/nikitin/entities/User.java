@@ -5,29 +5,42 @@ import lombok.Data;
 import javax.persistence.*;
 import java.util.Collection;
 
+
 @Entity
 @Data
 @Table(name="users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
-    @Column
+    @Column(name = "username")
     private String username;
 
-    @Column
+    @Column(name = "password")
     private String password;
 
-    @Column
+    @Column(name = "email")
     private String email;
 
-
     @ManyToMany
-    @JoinTable(name = "users_role", joinColumns = @JoinColumn(name = "user_id"),
+    @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"),
     inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Collection<Role> roles;
 
-    private Collection<Role> role;
+    public User() {
+    }
+    public User(String username, String encode, String email) {
+        this.username = username;
+        this.password = encode;
+        this.email = email;
+    }
+    public User(String username, String email, Collection<Role> roles) {
+        this.username = username;
+        this.email = email;
+        this.roles = roles;
+    }
 
     @Override
     public String toString() {
@@ -39,8 +52,20 @@ public class User {
                 '}';
     }
 
-//    public  void addUser(User user){
-//        this.user.add(user);
+    public boolean isEmpty() {
+        if(username.isEmpty()){
+            return true;
+        }
+          return false;
+    }
+
+//    @JsonIgnore
+//    @Transient
+//    private boolean confirmed;
+
+//
+//    public  void update (User user){
+//        this.User.update(user);
 //    }
 
 

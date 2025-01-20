@@ -1,0 +1,10 @@
+-- DROP TABLE IF EXISTS question_answers;
+
+-- CREATE TABLE question_answers (
+--                              question_id bigint NOT NULL,
+--                              answer_id bigint NOT NULL,
+--                              PRIMARY KEY (question_id,answer_id),
+--                              FOREIGN KEY (question_id) REFERENCES questions (id),
+--                              FOREIGN KEY (answer_id) REFERENCES answers (id)
+-- );
+-- insert into question_answers (question_id, answer_id) VALUES (1,1);

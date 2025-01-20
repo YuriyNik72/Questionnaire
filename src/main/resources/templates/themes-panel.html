@@ -3,7 +3,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <html xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <head>
-        <title>Вопросник</title>
+        <title>Темы</title>
 
         <link rel="icon" type="image/png" th:href="@{/templates/images/favicon.ico}"/>
 
@@ -20,11 +20,22 @@
         <div class="container">
             <img th:src="@{/images/GT.jpg}" />
             <br>
-            <h1>Опросник</h1>
+            <h1>Темы</h1>
 
-            Добро пожаловать в наш опросник, работающий для Вас с 2023 года!
+            Выберите тему для обучения или сдачи экзамена
         </div>
-        <br>
-        <div th:replace="~{navigation :: navi(Home)}" />
+    <br>
+<!--    <div th:replace="~{navigation :: navi(Home)}" />-->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <li class="nav-item" th:classappend="${activeTab == 'Shop' ? 'active' : ''}">
+                <a class="nav-link" th:href="@{/themes}">ЭТО<span class="sr-only">ETO</span></a>
+            </li>
+            <li class="nav-item" th:classappend="${activeTab == 'Shop' ? 'active' : ''}">
+                <a class="nav-link" th:href="@{/themes}">ТМО<span class="sr-only">TMO</span></a>
+            </li>
+            <li class="nav-item" th:classappend="${activeTab == 'Shop' ? 'active' : ''}">
+                <a class="nav-link" th:href="@{/themes}">ОТ<span class="sr-only">OT</span></a>
+            </li>
+        </div>
     </body>
 </html>
