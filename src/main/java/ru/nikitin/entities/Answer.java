@@ -1,17 +1,19 @@
 package ru.nikitin.entities;
 
 
+import lombok.*;
 import lombok.extern.log4j.Log4j2;
-
 import javax.persistence.*;
-import java.util.Date;
-import java.util.List;
+import java.util.Calendar;
 
 
+@Setter
+@Getter
 @Log4j2
 @Entity
 @Table(name = "answers")
 public class Answer {
+
 
 
     @Id
@@ -19,12 +21,27 @@ public class Answer {
     @Column(name = "id")
     private Long id;
 
+
     @Column(name = "answer_1")
     private String answer_1;
+
+
+    @Column(name = "otvet_1")
+    private Integer otvet_1=0;
+
+
     @Column(name = "answer_2")
     private String answer_2;
+
+    @Column(name = "otvet_2")
+    private Integer otvet_2=0;
+
     @Column(name = "answer_3")
     private String answer_3;
+
+    @Column(name = "otvet_3")
+    private Integer otvet_3=0;
+
 
     @ManyToOne( cascade = CascadeType.ALL)
     @JoinColumn(name ="question_id")
@@ -32,58 +49,27 @@ public class Answer {
 
     @Column(name = "create_at")
     @Temporal(TemporalType.DATE)
-    private Date createAt;
+    private Calendar createAt;
 
+//    @Column(name="type")
+//    private String type;
+//
+//    public String getType() {
+//        return type;
+//    }
+//
+//    public void setType(String type) {
+//        this.type = type;
+//    }
 
-    public Answer() {
-        log.info("конструктор Answer без параметров");
+    public Answer() {log.info("конструктор Answer без параметров");
     }
 
-    public Long getId() {
-        return id;
+    public Calendar getCreateAt() {
+        return Calendar.getInstance();
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getAnswer_1() {
-        return answer_1;
-    }
-
-    public void setAnswer_1(String answer_1) {
-        this.answer_1 = answer_1;
-    }
-
-    public String getAnswer_2() {
-        return answer_2;
-    }
-
-    public void setAnswer_2(String answer_2) {
-        this.answer_2 = answer_2;
-    }
-
-    public String getAnswer_3() {
-        return answer_3;
-    }
-
-    public void setAnswer_3(String answer_3) {
-        this.answer_3 = answer_3;
-    }
-
-    public Question getQuestion() {
-        return question;
-    }
-
-    public void setQuestion(Question question) {
-        this.question = question;
-    }
-
-    public Date getCreateAt() {
-        return createAt;
-    }
-
-    public void setCreateAt(Date createAt) {
+    public void setCreateAt(Calendar createAt) {
         this.createAt = createAt;
     }
 

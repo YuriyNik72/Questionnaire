@@ -5,6 +5,7 @@ CREATE TABLE answers (
        answer_1 varchar (2000),
        answer_2 varchar (2000),
        answer_3 varchar (2000),
+       create_At  date ,
        question_id int
              REFERENCES questions (id)
              on delete CASCADE

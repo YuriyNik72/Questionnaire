@@ -3,23 +3,26 @@
 	  xmlns:th="http://www.thymeleaf.org" >
 	<head>
 		<meta charset="utf-8" />
-		<title>Edit Question</title>
+		<title> Edit Question</title>
 	</head>
 	<body>
 	<div align="center">
-		<h1>Edit Question</h1>
+		<h1>Редактирование вопроса</h1>
 		<br>
 		<form th:action="@{/manager/edit}" th:object="${question}"
 			  method="post" enctype="multipart/form-data">
 				<input th:field="*{id}" type="hidden" data-th-hidden="id"/>
 
-			<table border="0" cellpadding="10">
+			<table class="table" border="5" cellpadding="25">
 				<tr>
+					<td>Вопрос:</td>
 					<td>
+						<input type="text" th:field="*{questionName}">
+					</td>
 						<div class="input-group">
-							<div class="form-group col-md-12">
+							<div class="form-group col-md-22">
 								<label>Выберите категорию</label>
-								<select th:field="*{category}" class="form-control">
+								<select class="form-control" th:field="*{category}" >
 									<option th:each="category: ${categories}"
 											th:value="${category.id}"
 											th:text="${category.categoryName}">
@@ -27,42 +30,37 @@
 								</select>
 							</div>
 						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>Question:</td>
-					<td>
-						<input type="text" th:field="*{questionName}"/>
-					</td>
+					<br>
+					<br>
 				</tr>
 				<div class="col form-group" th:object="${answers}">
 					<tr >
-						<td>Answer_1:</td>
+						<td>Ответ_1:</td>
 						<td>
 							<input  th:field="*{answer_1}" type="text"/>
+							<input th:field="*{otvet_1}" type="checkbox" th:value="${1}"/>
 						</td>
 					</tr>
 					<tr>
-						<td>Answer_2:</td>
+						<td>Ответ_2:</td>
 						<td>
 							<input  th:field="*{answer_2}" type="text"/>
+							<input th:field="*{otvet_2}" type="checkbox" th:value="${1}"/>
 						</td>
 					</tr>
 					<tr>
-						<td>Answer_3:</td>
+						<td>Ответ_3:</td>
 						<td>
 							<input  th:field="*{answer_3}" type="text"/>
+							<input th:field="*{otvet_3}" type="checkbox" th:value="${1}"/>
 						</td>
 					</tr>
-<!--				</div>-->
-
 					<tr>
 						<td colspan="2">
-							<button type="submit">Save</button>
+							<button type="submit">Сохранить</button>
 						</td>
 					</tr>
 				</div>
-<!--				</form>-->
 			</table>
 		</form>
 	</div>

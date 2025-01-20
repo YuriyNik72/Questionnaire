@@ -9,7 +9,7 @@
 		<div align="center">
 			<h1>Новый вопрос</h1>
 			<br/>
-			<form action="#" th:action="@{/manager/save}" th:object="${question}" method="post">
+			<form th:action="@{/manager/save}" th:object="${question}" method="post">
 				<table class="table" border="5" cellpadding="25">
 					<tr>
 						<td>Вопрос:</td>
@@ -36,18 +36,21 @@
 							<td>Ответ-1:</td>
 							<td>
 								<input type="text" th:field="*{answer_1}" placeholder="Введите ответ-1"/>
+								<input th:field="*{otvet_1}" type="checkbox" th:value="${1}"/>
 							</td>
 						</tr>
 						<tr>
 							<td>Ответ-2:</td>
 							<td>
 								<input type="text" th:field="*{answer_2}" placeholder="Введите ответ-2"/>
+								<input th:field="*{otvet_2}" type="checkbox" th:value="${1}"/>
 							</td>
 						</tr>
 						<tr>
 							<td>Ответ-3:</td>
 							<td>
 								<input type="text" th:field="*{answer_3}" placeholder="Введите ответ-3"/>
+								<input th:field="*{otvet_3}" type="checkbox" th:value="${1}"/>
 							</td>
 						</tr>
 						<tr>
